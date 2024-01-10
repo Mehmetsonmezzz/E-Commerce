@@ -7,6 +7,8 @@ public interface CategoryService {
     CategoryResponse save(Category category);
     CategoryResponse findById(long id);
 
+    CategoryResponse getAll();
+
     CategoryResponse delete(long id);
 
 

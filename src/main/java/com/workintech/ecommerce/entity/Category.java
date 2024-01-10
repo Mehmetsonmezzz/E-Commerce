@@ -22,19 +22,17 @@ public class Category {
     @Column(name = "id")
     private Long id;
 
-    @Max(value = 25,message = "Name cannot exceed 25 characters")
+    //@Max(value = 25,message = "Name cannot exceed 25 characters")
     @Column(name = "name")
     private String name;
 
     @Column(name = "image")
-    @Lob
-    private byte[] image;
+    private String image;
 
-    @ManyToMany(cascade ={CascadeType.DETACH, CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable(name = "product_category",schema = "ecommerce",
-               joinColumns = @JoinColumn(name = "category_id"),
-                inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> products=new ArrayList<>();
+    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name="category_id")
+    private List<Product> products;
+
+
 
 }
