@@ -1,5 +1,6 @@
 package com.workintech.ecommerce.entity;
 
+import com.workintech.ecommerce.entity.Enum.Gender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,18 +27,23 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "image")
-    @Lob
-    private byte[] image;
+    @Column(name = "gender")
+    private Gender gender;
+
 
     @Column(name = "price")
     private Double price;
 
-    @ManyToMany(cascade ={CascadeType.DETACH, CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable(name = "product_category",schema = "ecommerce",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
-    private List<Category> categories =new ArrayList<>();
+    @Column(name = "image_url")
+    private List<String> imageUrl;
+
+
+    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinColumn(name="category_id")
+    private Category category;
+
+
+
+
 
 }

@@ -1,4 +1,6 @@
 package com.workintech.ecommerce.dto;
 
-public record ProductResponse(String name,String description,byte[] image) {
+import java.util.List;
+
+public record ProductResponse(String name, String description, List<String> image) {
 }

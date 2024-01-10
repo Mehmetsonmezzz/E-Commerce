@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponse findById(long id) {
       Optional<Product> productOptional= productRepository.findById(id);
       if (productOptional.isPresent()){
-          return new ProductResponse(productOptional.get().getName(),productOptional.get().getDescription(),productOptional.get().getImage()) ;
+          return new ProductResponse(productOptional.get().getName(),productOptional.get().getDescription(),productOptional.get().getImageUrl()) ;
       }
       //Todo throw
         return null ;
