@@ -25,8 +25,6 @@ public class Role implements GrantedAuthority {
     private String authority;
 
 
-    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinColumn(name="role_id")
-    private List<ApplicationUser> users;
+
 
 }
