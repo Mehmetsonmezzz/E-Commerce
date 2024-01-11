@@ -50,7 +50,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryResponse getAll() {
 
-        return ;
+        return null ;
     }
 
     @Override
