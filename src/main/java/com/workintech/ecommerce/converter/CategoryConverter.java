@@ -10,12 +10,13 @@ import java.util.stream.Collectors;
 
 public class CategoryConverter {
 
-    /*public static CategoryResponse convertToResponse(Category category) {
+    public static CategoryResponse convertToResponse(Category category) {
         return new CategoryResponse(category.getId(), category.getName(), category.getImage(),category.getProducts());
     }
 
     public static List<ProductResponse> convertListToResponse(List<Product> productList) {
         return productList.stream()
-                .map(ProductConverter::convertToResponse)
-        */
+                .map(ProductConverter::convertToResponse).toList();
+
+}
 }

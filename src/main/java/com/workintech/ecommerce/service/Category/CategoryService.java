@@ -3,13 +3,16 @@ package com.workintech.ecommerce.service.Category;
 import com.workintech.ecommerce.dto.CategoryResponse;
 import com.workintech.ecommerce.entity.Category;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface CategoryService {
     CategoryResponse save(Category category);
-    CategoryResponse findById(long id);
+    Category findById(long id);
 
-    CategoryResponse getAll();
+    List<CategoryResponse> getAll();
 
-    CategoryResponse delete(long id);
+    void delete(long id);
 
 
 

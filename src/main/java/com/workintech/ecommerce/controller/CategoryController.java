@@ -1,5 +1,6 @@
 package com.workintech.ecommerce.controller;
 
+import com.workintech.ecommerce.converter.CategoryConverter;
 import com.workintech.ecommerce.dto.CategoryProductRequest;
 import com.workintech.ecommerce.dto.CategoryResponse;
 import com.workintech.ecommerce.dto.ProductResponse;
@@ -29,5 +30,22 @@ public class CategoryController {
  public CategoryResponse save(@RequestBody Category category){
        return categoryService.save(category);
  }
+
+ @GetMapping("/{id}")
+ public CategoryResponse getById(@PathVariable long id){
+        return CategoryConverter.convertToResponse(categoryService.findById(id));
+    }
+
+
+ @GetMapping("/")
+    public List<CategoryResponse> getAll(){
+        return categoryService.getAll();
+ }
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable long id){
+        categoryService.delete(id);
+       return "Category id number "+id+" has been deleted";
+    }
+
 
 }
