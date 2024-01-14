@@ -2,9 +2,12 @@ package com.workintech.ecommerce.entity.User;
 
 import com.workintech.ecommerce.entity.Category;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,12 +29,16 @@ public class ApplicationUser implements UserDetails {
     @Column(name = "id")
     private Long id;
 
+    @NotNull(message = "name must be included in user information")
     @Column(name = "full_name")
     private String fullName;
 
-    @Column(name = "email")
+    @Email
+    @NotNull(message = "email must be included in user information")
+    @Column(name = "email",unique = true)
     private String email;
 
+    @NotNull
     @Column(name = "password")
     private String password;
 
