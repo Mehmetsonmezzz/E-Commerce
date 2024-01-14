@@ -1,5 +1,6 @@
 package com.workintech.ecommerce.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.workintech.ecommerce.entity.Enum.Gender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -38,12 +39,9 @@ public class Product {
     private List<String> imageUrl;
 
 
+    @JsonBackReference
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name="category_id")
     private Category category;
-
-
-
-
 
 }
