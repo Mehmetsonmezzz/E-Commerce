@@ -1,21 +1,16 @@
 package com.workintech.ecommerce.entity.User;
 
-import com.workintech.ecommerce.entity.Category;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -82,4 +77,21 @@ public class ApplicationUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
+
+
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",fetch = FetchType.EAGER)
+    private List<Address> addresses;
+
+    public void addAddress(Address address) {
+        if (addresses == null) {
+            addresses = new ArrayList<>();
+        }
+        addresses.add(address);
+    }
+
+
 }
+
