@@ -1,5 +1,7 @@
 package com.workintech.ecommerce.config;
 
+import com.workintech.ecommerce.repository.UserRepository;
+import com.workintech.ecommerce.service.User.LoginUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +16,12 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+
+
+    @Bean
+    public LoginUserService loginUserService(UserRepository userRepository) {
+        return new LoginUserService(userRepository);
+    }
 
         @Bean
         public PasswordEncoder passwordEncoder(){
