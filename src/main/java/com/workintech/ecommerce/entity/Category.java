@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,10 +28,12 @@ public class Category {
     @Column(name = "id")
     private Long id;
 
-    //@Max(value = 25,message = "Name cannot exceed 25 characters")
+    @NotBlank(message = "name must not be null, empty or blank")
+    @Max(value = 25,message = "Name cannot exceed 25 characters")
     @Column(name = "name")
     private String name;
 
+    @NotBlank(message = "Image must not be null, empty or blank")
     @Column(name = "image")
     private String image;
 

@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import com.workintech.ecommerce.entity.Enum.Gender;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,16 +28,18 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Name must not be null, empty or blank")
     @Column(name = "name")
     private String name;
 
+    @NotBlank(message = "description must not be null, empty or blank")
     @Column(name = "description")
     private String description;
 
     @Column(name = "gender")
     private Gender gender;
 
-
+    @Min(value = 0,message = "Rating must not be null less than 0")
     @Column(name = "price")
     private Double price;
 

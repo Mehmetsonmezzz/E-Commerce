@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.workintech.ecommerce.entity.User.ApplicationUser;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,9 +30,12 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-    //@Max(value = 25,message = "Name cannot exceed 25 characters")
+
+    @NotBlank(message = "Title must not be null, empty or blank")
+    @Max(value = 25,message = "Name cannot exceed 25 characters")
     @Column(name = "name")
     private String name;
+
 
     @Column(name = "order_date_time")
     private LocalDateTime orderDateTime=LocalDateTime.now();
