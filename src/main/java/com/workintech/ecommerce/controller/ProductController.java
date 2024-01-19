@@ -46,7 +46,7 @@ public class ProductController {
 
         CategoryResponse categoryResponse = CategoryConverter.convertToResponse(product.getCategory());
 
-        return new ProductResponse(product.getName(),product.getDescription(),product.getImageUrl(),product.getCategory().getId());
+        return new ProductResponse(product.getName(),product.getDescription(),product.getImageUrl());
     }
     @PutMapping("/{categoryId}/{productId}")
     public ProductResponse update(@PathVariable long categoryId, @PathVariable long productId, @RequestBody Product updatedProduct) {
@@ -64,7 +64,7 @@ public class ProductController {
                 category.addProduct(existingProduct);
                 productService.save(existingProduct);
                 CategoryResponse categoryResponse = CategoryConverter.convertToResponse(existingProduct.getCategory());
-                return new ProductResponse(existingProduct.getName(), existingProduct.getDescription(), existingProduct.getImageUrl(),existingProduct.getCategory().getId());
+                return new ProductResponse(existingProduct.getName(), existingProduct.getDescription(), existingProduct.getImageUrl());
             } else {
                 throw new GlobalException("Product not found! " + productId, HttpStatus.NOT_FOUND);
             }

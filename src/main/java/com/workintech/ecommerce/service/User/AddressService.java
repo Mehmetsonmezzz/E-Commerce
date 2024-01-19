@@ -1,20 +1,20 @@
 package com.workintech.ecommerce.service.User;
 
+import com.workintech.ecommerce.dto.AddressRequest;
 import com.workintech.ecommerce.entity.User.*;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Optional;
 
 public interface AddressService {
 
 
     Address save(Address address);
 
-    Address saveAddress(Address address);
+    Address saveAddress(AddressRequest addressRequest, UserDetails userDetails);
 
-    City getCityByName(String cityName);
+    Address findById(long id);
 
-    Town getTownByNameAndCity(String townName, City city);
-
-    District getDistrictByNameAndTown(String districtName, Town town);
-
-    Quarter getQuarterByNameAndDistrict(String quarterName, District district);
+    Address delete(long id);
 }
 

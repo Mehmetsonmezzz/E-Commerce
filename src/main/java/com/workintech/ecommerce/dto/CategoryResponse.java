@@ -5,5 +5,5 @@ import com.workintech.ecommerce.entity.Product;
 
 import java.util.List;
 
-public record CategoryResponse(Long id, String name, String image,List<Product> products) {
+public record CategoryResponse( String name, String image,List<ProductResponse> products) {
 }

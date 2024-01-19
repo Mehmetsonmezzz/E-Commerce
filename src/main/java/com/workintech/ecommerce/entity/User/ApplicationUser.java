@@ -1,6 +1,8 @@
 package com.workintech.ecommerce.entity.User;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.workintech.ecommerce.entity.Order;
+import com.workintech.ecommerce.entity.Product;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -92,6 +94,16 @@ public class ApplicationUser implements UserDetails {
         addresses.add(address);
     }
 
+
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    private List<Order> orderList;
+    public void addOrder(Order orders) {
+        if (orderList == null) {
+            orderList = new ArrayList<>();
+        }
+        orderList.add(orders);
+    }
 
 }
 

@@ -1,6 +1,7 @@
 package com.workintech.ecommerce.controller;
 
 import com.workintech.ecommerce.converter.CategoryConverter;
+import com.workintech.ecommerce.converter.ProductConverter;
 import com.workintech.ecommerce.dto.CategoryProductRequest;
 import com.workintech.ecommerce.dto.CategoryResponse;
 import com.workintech.ecommerce.dto.ProductResponse;
@@ -28,7 +29,10 @@ public class CategoryController {
 
     @PostMapping("/")
  public CategoryResponse save(@RequestBody Category category){
-       return categoryService.save(category);
+         Category category1= categoryService.save(category);
+
+        return CategoryConverter.convertToResponse(category1);
+
  }
 
  @GetMapping("/{id}")

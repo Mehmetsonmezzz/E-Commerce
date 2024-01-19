@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class CategoryConverter {
 
     public static CategoryResponse convertToResponse(Category category) {
-        return new CategoryResponse(category.getId(), category.getName(), category.getImage(),category.getProducts());
+        return new CategoryResponse( category.getName(), category.getImage(),ProductConverter.convertListToResponse(category.getProducts()) );
     }
 
     public static List<ProductResponse> convertListToResponse(List<Product> productList) {

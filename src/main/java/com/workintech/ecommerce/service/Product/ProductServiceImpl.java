@@ -10,6 +10,7 @@ import com.workintech.ecommerce.exception.GlobalException;
 import com.workintech.ecommerce.repository.CategoryRepository;
 import com.workintech.ecommerce.repository.ProductRepository;
 import com.workintech.ecommerce.service.Product.ProductService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -31,14 +32,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    /* @Override
-    public Category findById(long id) {
-        Optional<Category> optionalCategory = categoryRepository.findById(id);
-        if(optionalCategory.isPresent()){
-            return optionalCategory.get();
-        }
-        throw new GlobalException("The category with given id does not exist! ID: "+id, HttpStatus.NOT_FOUND);
-    }*/
     @Override
     public Product findById(long id) {
       Optional<Product> productOptional= productRepository.findById(id);
@@ -52,33 +45,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponse save(Product product) {
 
-     /*   Product savedProduct = productRepository.save(product);
 
-     CategoryResponse categoryResponse=CategoryConverter.convertToResponse(product.getCategory());
-
-        return new ProductResponse(
-                savedProduct.getName(),
-                savedProduct.getDescription(),
-                savedProduct.getImageUrl(),
-                savedProduct.getCategory()
-                 // CategoryResponse'ı ekleyin
-
-        );*/
 
         return ProductConverter.convertToResponse(productRepository.save(product));
     }
-    /* @Override
-    public List<CategoryResponse> getAll() {
-        List<Category> categoryList = categoryRepository.findAll();
-        List<CategoryResponse> returnList = new ArrayList<>();
 
-        categoryList.forEach(category -> {
-            List<ProductResponse> productResponses = ProductConverter.convertListToResponse(category.getProducts());
-
-            returnList.add(new CategoryResponse(category.getId(), category.getName(), category.getImage(),category.getProducts()));
-        });
-        return returnList;
-    }*/
 
     @Override
     public List<ProductResponse> getAll() {
@@ -88,9 +59,16 @@ public class ProductServiceImpl implements ProductService {
       return ProductConverter.convertListToResponse(productList);
     }
 
+
+    @Transactional
     @Override
     public void delete(long id) {
-        categoryRepository.deleteById(id);
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()) {
+            productRepository.deleteById(id);
+        } else {
+            throw new GlobalException("id not exist", HttpStatus.NOT_FOUND);
+        }
     }
 
 

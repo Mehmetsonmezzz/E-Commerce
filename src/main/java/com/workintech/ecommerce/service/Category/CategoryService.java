@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CategoryService {
-    CategoryResponse save(Category category);
+    Category save(Category category);
     Category findById(long id);
 
     List<CategoryResponse> getAll();

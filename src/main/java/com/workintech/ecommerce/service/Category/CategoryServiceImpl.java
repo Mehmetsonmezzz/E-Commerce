@@ -4,6 +4,7 @@ import com.workintech.ecommerce.converter.ProductConverter;
 import com.workintech.ecommerce.dto.CategoryResponse;
 import com.workintech.ecommerce.dto.ProductResponse;
 import com.workintech.ecommerce.entity.Category;
+import com.workintech.ecommerce.entity.Product;
 import com.workintech.ecommerce.exception.GlobalException;
 import com.workintech.ecommerce.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryResponse save(Category category) {
-
-        Category savedCategory = categoryRepository.save(category);
-        List<ProductResponse> productResponses = ProductConverter.convertListToResponse(savedCategory.getProducts());
-
-        return new CategoryResponse(savedCategory.getId(), savedCategory.getName(),savedCategory.getImage(),savedCategory.getProducts());
+    public Category save(Category category) {
+        for (Product product : category.getProducts()) {
+            product.setCategory(category);
+        }
+        return categoryRepository.save(category);
     }
 
     @Override
@@ -51,13 +51,19 @@ public class CategoryServiceImpl implements CategoryService {
         categoryList.forEach(category -> {
             List<ProductResponse> productResponses = ProductConverter.convertListToResponse(category.getProducts());
 
-            returnList.add(new CategoryResponse(category.getId(), category.getName(), category.getImage(),category.getProducts()));
+            returnList.add(new CategoryResponse( category.getName(), category.getImage(),ProductConverter.convertListToResponse(category.getProducts())));
         });
         return returnList;
     }
 
     @Override
     public void delete(long id) {
-    categoryRepository.deleteById(id);
+       Optional<Category> category=categoryRepository.findById(id);
+       if(category.isPresent()){
+           categoryRepository.deleteById(id);
+       }else {
+           throw new GlobalException("id not exist", HttpStatus.NOT_FOUND);
+       }
+
     }
 }

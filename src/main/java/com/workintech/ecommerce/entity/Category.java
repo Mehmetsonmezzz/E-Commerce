@@ -1,7 +1,10 @@
 package com.workintech.ecommerce.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import lombok.AllArgsConstructor;
@@ -10,6 +13,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,7 +34,6 @@ public class Category {
     @Column(name = "image")
     private String image;
 
-    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "category",fetch = FetchType.EAGER)
     private List<Product> products;
 

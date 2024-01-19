@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class ProductConverter {
 
     public static ProductResponse convertToResponse(Product product) {
-        return new ProductResponse( product.getName(), product.getDescription(),product.getImageUrl(),product.getCategory().getId());
+        return new ProductResponse( product.getName(), product.getDescription(),product.getImageUrl());
     }
 
     public static List<ProductResponse> convertListToResponse(List<Product> productList) {

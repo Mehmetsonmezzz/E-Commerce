@@ -13,4 +13,10 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
     @Query("SELECT p From Product p WHERE p.gender= :gender")
     Product findProductByGender(long gender);
+
+    @Query("SELECT p From Product p WHERE p.name= :name")
+    Optional<Product> findByName(String name);
+
+    //@Query("SELECT c FROM City c WHERE c.name = :name")
+    //    Optional<City> findByName(String name);
 }
