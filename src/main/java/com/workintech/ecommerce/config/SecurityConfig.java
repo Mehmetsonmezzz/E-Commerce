@@ -43,6 +43,12 @@ public class SecurityConfig {
                   //  auth.requestMatchers("/category/**").permitAll();
                     auth.requestMatchers("/category/**").hasAnyAuthority("ADMIN","USER");
                     auth.requestMatchers("/auth/**").permitAll();
+                    auth.requestMatchers("/address/**").hasAnyAuthority("ADMIN","USER");
+                    auth.requestMatchers("/product/**").hasAnyAuthority("ADMIN","USER");
+                    auth.requestMatchers("/order/**").hasAnyAuthority("ADMIN","USER");
+                    auth.requestMatchers("/city/**").hasAnyAuthority("ADMIN","USER");
+
+
 
                     auth.anyRequest().authenticated();
                 })
